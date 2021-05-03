@@ -1,0 +1,30 @@
+<button (click)="create()">Create Folder</button>\<br />
+<br />
+<app-filter-list (changed)="filter($event)"></app-filter-list>
+<br />
+<br />
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th (click)="sort('name')">Name</th>
+            <th (click)="sort('dateCreated')">Date Created</th>
+            <th (click)="sort('dateLastUsed')">Date Last Used</th>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let f of filteredFolders">
+        <td>
+            <a [routerLink]="['/folders', f.id]">
+                {{ f.name | capitalize }}
+            </a>
+        </td>
+        <td>{{ f.dateCreated }}</td>
+        <td>{{ f.dateLastUsed }}</td>
+        <td>{{ f.categories }}</td>
+    </tr>
+    <tr *ngIf="!filteredFolders || !filteredFolders.length">
+        <td colspan="4">No folders found</td>
+    </tr>
+</table>
+Number of Folders: {{ filteredFolders.length }}
+<br />

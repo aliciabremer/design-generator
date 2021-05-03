@@ -1,0 +1,16 @@
+<h2>Edit Image</h2>
+<br />
+<br />
+<div>
+	<h4>X position</h4>
+	<input type="range" min="0" max="{{width}}" value="{{img.x}}" class="slider" id="xRange" (change)="getXPos($event)" (oninput)="getXPos($event)">
+	<h4>Y position</h4>
+	<input type="range" min="0" max="{{height}}" value="{{img.y}}" class="slider" id="yRange" (change)="getYPos($event)" (oninput)="getYPos($event)">
+	<h4>Width</h4>
+	<input type="range" min="0" max="{{width}}" value="{{img.width}}" class="slider" id="width" (change)="getXWidth($event)" (oninput)="getXWidth($event)">
+	<h4>Height</h4>
+	<input type="range" min="0" max="{{height}}" value="{{img.height}}" class="slider" id="height" (change)="getYHeight($event)" (oninput)="getYHeight($event)">
+	<!--Fix value-->
+</div>
+<button (click)="finished()">Done</button>
+<button (click)="delete()">Delete</button>

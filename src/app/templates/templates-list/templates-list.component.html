@@ -1,0 +1,15 @@
+<button (click)="sort('name')">Sort By Name</button>
+<button (click)="sort('dateCreated')">Sort Oldest To Newest</button>
+<br />
+<app-filter-temp (changed)="filter($event)"></app-filter-temp>
+<br />
+<button (click)="create()" >Create Template</button>
+<div *ngFor="let t of filteredTemplates;" class="container">
+	<div class="item">
+		<app-draw-temp [template]="t" [scaling]="0.1"></app-draw-temp>
+		<br />
+		<button [routerLink] = "['/templates', t.id]">Edit Template</button>
+		<br />
+		<button [routerLink] = "['/delete-template', t.id]">Delete Template</button>
+	</div>
+</div>

@@ -1,0 +1,34 @@
+<h2>Edit Text</h2>
+<br />
+<br />
+<div>
+	<h4>X position</h4>
+	<input type="range" min="0" max="{{width}}" value="{{text.x}}" class="slider" id="xRange" (change)="getXPos($event)" (oninput)="getXPos($event)">
+	<h4>Y position</h4>
+	<input type="range" min="0" max="{{height}}" value="{{text.y}}" class="slider" id="yRange" (change)="getYPos($event)" (oninput)="getYPos($event)">
+	<h4>Width</h4>
+	<input type="range" min="0" max="{{width}}" value="{{text.maxWidth}}" class="slider" id="width" (change)="getXWidth($event)" (oninput)="getXWidth($event)">
+	<h4>Height</h4>
+	<input type="range" min="0" max="{{height}}" value="{{text.height}}" class="slider" id="height" (change)="getYHeight($event)" (oninput)="getYHeight($event)">
+	<!--Fix value-->
+</div>
+<div>
+	<label for="colourSelect">Colour</label>
+	<select id="colourSelect" [ngModel]="text.colour" (ngModelChange)="selectColour($event)"  class="select-colour">
+    	<option [value]="indexOfElement" *ngFor="let i of colours;let indexOfElement=index;trackBy:trackByIndex;">Colour {{indexOfElement + 1}}</option>
+	</select>
+</div>
+<div>
+	<label for="fontSelect">Font</label>
+	<select id="fontSelect" [ngModel]="text.font" (ngModelChange)="selectFont($event)"  class="select-colour">
+    	<option [value]="indexOfElement" *ngFor="let i of colours;let indexOfElement=index;trackBy:trackByIndex;">Font {{indexOfElement + 1}}</option>
+	</select>
+</div>
+<div>
+	<label for="textSelect">Text type</label>
+	<select id="textSelect" [ngModel]="text.type" (ngModelChange)="selectType($event)"  class="select-colour">
+    	<option [value]="indexOfElement" *ngFor="let i of textTypes;let indexOfElement=index;trackBy:trackByIndex;">{{i}}</option>
+	</select>
+</div>
+<button (click)="finished()">Done</button>
+<button (click)="delete()">Delete</button>

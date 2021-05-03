@@ -1,0 +1,12 @@
+.item {
+    float: left;
+    padding: 2%;
+} 
+.boxes {
+	padding: 2%;
+}
+
+.end {
+	clear:both;
+}
+

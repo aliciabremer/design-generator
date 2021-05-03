@@ -1,0 +1,18 @@
+<h2>User Template Preferences (Optional)</h2>
+<br>
+<h4>Colours</h4>
+<div *ngFor="let c of user.colours">
+	<p>{{ c }}</p>
+</div>
+<br>
+<h4>Text Type</h4>
+<div *ngFor="let t of user.textType">
+	<p>{{ t }}</p>
+</div>
+<br>
+<h4>Fonts</h4>
+<div *ngFor="let f of user.fonts">
+	<p>{{ f }}</p>
+</div>
+<br>
+<button [routerLink]="['../edit']">Edit Preferences</button>

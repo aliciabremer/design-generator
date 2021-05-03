@@ -1,0 +1,7 @@
+<div *ngFor="let n of numbers;" class="container">
+	<div class="item">
+		<app-draw-design [folder]="getRandomFolder()" [template]="getRandomTemplate()" [scaling]="0.1"></app-draw-design>
+	</div>
+</div>
+<button (click)="download()">Download All</button>
+<!--Later add ability to schedule once connected to api-->

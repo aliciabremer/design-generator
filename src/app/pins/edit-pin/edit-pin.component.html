@@ -1,0 +1,32 @@
+<h2>Edit {{ folder.name | capitalize }}</h2>
+<br />
+<br />
+<h4>Title</h4>
+<input name="title" type="text" [(ngModel)] = "folder.name">
+<h4>Categories</h4>
+<div *ngFor="let c of folder.categories;let indexOfElement=index;trackBy:trackByIndex;">
+	<input name=a{{indexOfElement}} type="text" [(ngModel)] = "folder.categories[indexOfElement]">
+	<button (click)="removeCategory(indexOfElement)">Remove Category</button>
+</div>
+<button (click)="addCategory()">Add Category</button>
+<br />
+<h4>Text Options</h4>
+<!--fix-->
+<div *ngFor="let x of user.textType;let i=index;tra:trackByIndex;">
+	<h5>{{x | capitalize }}</h5>
+	<div *ngFor="let t of folder.text[i];let indexOfElement=index;trackBy:trackByIndex;">
+		<input name=a{{indexOfElement}} type="text" [(ngModel)] = "folder.text[indexOfElement]">
+		<button (click)="removeText(i, indexOfElement)">Remove Category</button>
+	</div>
+	<button (click)="addText(i)">Add {{ x }}</button>
+</div>
+
+<br>
+<h4>Images</h4>
+<div *ngFor="let i of folder.image;let indexOfElement=index;trackBy:trackByIndex;">
+	 <img src="i" alt={{folder.name}}> 
+</div>
+<input type="file" accept=".png, .jpg, .jpeg" #image1>
+<button (click)="addImage(image1.value)">Add Image</button>
+<br>
+<button (click)="changePreferences()" [routerLink]="['/folders', id]">Finish Editing</button>

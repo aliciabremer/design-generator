@@ -1,0 +1,27 @@
+<h2>Generate Designs</h2>
+<div class = "block">
+	<h3>Select Templates</h3>
+	<ul class="templates">
+		<li class = "item" (click)="selectAllTemp()">All</li> 
+  		<li class = "item" *ngFor="let t of temps" (click)="addTemplate(t)">
+    		{{t.name}}
+  		</li>
+	</ul>
+</div>
+<div class = "block">
+	<h3>Select Folders</h3>
+	<ul class="pins"> 
+  		<li class = "item" (click)="selectAllPins()">All</li> 
+  		<!--Add in categories-->
+  		<li class="item" *ngFor="let f of fol" (click)="addFolder(f)">
+    		{{f.name}}
+  		</li>
+	</ul>
+</div>
+<div>
+	<h2>Number Of Designs</h2>
+	<input type="range" min="0" max="200" value="{{num}}" class="slider" id="designNumber" (change)="getNumber($event)" (oninput)="getNumber($event)">
+</div>
+<button (click)="generate()">Generate Now</button>
+<app-get-designs [folders]="selectedF" [templates]="selectedT" [num]="num" *ngIf="doGenerate"></app-get-designs>
+<button (click)="done()">Done</button>

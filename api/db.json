@@ -1,0 +1,224 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "alicia",
+      "templateId": "1",
+      "folderId": "1",
+      "textType": [
+        "title"
+      ],
+      "colours": [
+        "white",
+        "black",
+        "blue"
+      ],
+      "fonts": [
+        "arial",
+        "happiness"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "name": "template 1",
+      "dateCreated": "2021-04-02",
+      "width": 1000,
+      "height": 1500,
+      "rectangles": [
+        {
+          "id": 1,
+          "x": 233,
+          "y": 631,
+          "height": 565,
+          "width": 350,
+          "colour": "1"
+        },
+        {
+          "id": 1,
+          "x": 0,
+          "y": 1000,
+          "height": 500,
+          "width": 1000,
+          "colour": 0
+        },
+        {
+          "id": 3,
+          "x": 0,
+          "y": 0,
+          "height": 200,
+          "width": 200,
+          "colour": 0
+        },
+        {
+          "id": 3,
+          "x": 0,
+          "y": 0,
+          "height": 200,
+          "width": 200,
+          "colour": 0
+        },
+        {
+          "id": 3,
+          "x": 0,
+          "y": 0,
+          "height": 200,
+          "width": 200,
+          "colour": 0
+        },
+        {
+          "id": 3,
+          "x": 0,
+          "y": 0,
+          "height": 200,
+          "width": 200,
+          "colour": 0
+        }
+      ],
+      "circles": [
+        {
+          "id": 1,
+          "xPos": 500,
+          "yPos": 500,
+          "radius": 20,
+          "colour": 0
+        }
+      ],
+      "texts": [
+        {
+          "id": "1",
+          "size": 30,
+          "type": 0,
+          "x": 0,
+          "y": 0,
+          "font": 0,
+          "colour": 1,
+          "maxWidth": 500,
+          "height": 0
+        }
+      ],
+      "images": [
+        {
+          "id": 1,
+          "x": 0,
+          "y": 0,
+          "width": 150,
+          "height": 150
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "name": "temporary",
+      "width": 1000,
+      "height": 1500,
+      "rectangles": [
+        {
+          "id": 3,
+          "x": 0,
+          "y": 0,
+          "height": 200,
+          "width": 200,
+          "colour": 0
+        }
+      ],
+      "circles": [],
+      "texts": [],
+      "images": []
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    }
+  ],
+  "folders": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "name": "food1",
+      "dateCreated": "2021-03-19",
+      "dateLastUsed": "2021-03-19",
+      "categories": [
+        "breakfast",
+        "lunch"
+      ],
+      "text": [
+        [
+          "www.thebreakfastwiz"
+        ],
+        [
+          "how to make super delicious food",
+          "more delicious food in 4 steps"
+        ]
+      ],
+      "image": [
+        "a file path"
+      ]
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "name": "food2",
+      "dateCreated": "2021-03-19",
+      "dateLastUsed": "2021-02-19",
+      "categories": [
+        "food",
+        "dessert"
+      ],
+      "text": [
+        [
+          "www.thebreakfastwiz.com"
+        ],
+        [
+          "cool foodie title",
+          "even cooler title i'm tired"
+        ]
+      ],
+      "image": [
+        "a file path 2"
+      ]
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "customerId": 1,
+      "name": "Hi",
+      "dateCreated": "2021-03-21",
+      "dateLastUsed": "2021-03-21",
+      "categories": [],
+      "text": [],
+      "image": [],
+      "id": 9
+    }
+  ]
+}

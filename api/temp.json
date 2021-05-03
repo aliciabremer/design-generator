@@ -1,0 +1,100 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "alicia",
+      "templateId": "1",
+      "folderId": "1",
+      "webName": "thebreakfastwiz",
+      "colours": [
+        "white",
+        "black",
+        "blue"
+      ],
+      "fonts": [
+        "arial",
+        "happiness"
+      ],
+      "colourPairings": [
+        [
+          "white",
+          "black"
+        ],
+        [
+          "white",
+          "blue"
+        ]
+      ],
+      "nameStyle": []
+    }
+  ],
+  "templates": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "width": 1000,
+      "height": 1500,
+      "rectangles": [
+        {
+          "id": 1,
+          "x": 0,
+          "y": 0,
+          "height": 150,
+          "width": 75
+        },
+        {
+          "id": 1,
+          "x": 0,
+          "y": 1000,
+          "height": 500,
+          "width": 1000
+        }
+      ],
+      "circles": [
+        {
+          "id": 1,
+          "xPos": 500,
+          "yPos": 500,
+          "radius": 20
+        }
+      ],
+      "texts": [
+        {
+          "id": "1",
+          "text": "[TITLE GOES HERE]",
+          "size": 30,
+          "type": "title"
+        }
+      ],
+      "images": []
+    }
+  ],
+  "folders": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "name":"food1",
+      "dateCreated":"2021-03-19",
+      "dateLastUsed":"2021-03-19",
+      "categories":["breakfast", "lunch"],
+      "title": [
+        "how to make super delicious food",
+        "more delicious food in 4 steps"
+      ],
+      "image": ["a file path"]
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "name":"food2",
+      "dateCreated":"2021-03-19",
+      "dateLastUsed":"2021-02-19",
+      "categories":["food", "dessert"],
+      "title": [
+        "cool foodie title",
+        "even cooler title i'm tired"
+      ],
+      "image": ["a file path 2"]
+    }
+  ]
+}

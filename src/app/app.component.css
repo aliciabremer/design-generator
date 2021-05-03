@@ -1,0 +1,12 @@
+.tp-container {
+   height:90%;
+   width:100%;
+   background: #eee;
+}
+.tp-section {
+   display: flex;
+   align-content: center;
+   align-items: center;
+   margin-bottom: 20px;
+   margin-right: 20px;  
+}
