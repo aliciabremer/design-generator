@@ -1,11 +1,7 @@
 export interface IUser
 {
-	id: number;
+	id: string;
 	name:string;
-	email:string;
-	templateId:number;
-	folderId:number;
-	//acctItems:IPinAcct[];
 	textType:string[];
 	colours:string[];
 	fonts:string[];
@@ -28,11 +24,12 @@ export interface IPinAcct
 export interface ITemplate
 {
 	id:number;
-	customerId:number;
+	customerId:string;
 	dateCreated:string;
 	name:string;
 	width:number;
 	height:number;
+	shapes:number[][];
 	rectangles:IRectangle[];
 	circles:ICircle[];
 	texts:IText[];
@@ -85,7 +82,7 @@ export interface IImage
 export interface IPinFolder
 {
 	id:number;
-	customerId:number;
+	customerId:string;
 	name:string;
 	dateCreated:string;
 	dateLastUsed:string;

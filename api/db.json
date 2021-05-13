@@ -1,10 +1,8 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "alicia",
-      "templateId": "1",
-      "folderId": "1",
       "textType": [
         "title"
       ],
@@ -21,12 +19,15 @@
   ],
   "templates": [
     {
-      "id": 1,
-      "customerId": 1,
+      "id": "1",
+      "customerId":"1",
       "name": "template 1",
       "dateCreated": "2021-04-02",
       "width": 1000,
       "height": 1500,
+      "shapes": [
+        [0, 1]
+      ],
       "rectangles": [
         {
           "id": 1,
@@ -110,11 +111,12 @@
       ]
     },
     {
-      "id": 2,
-      "customerId": 1,
+      "id": "2",
+      "custoemrId":"string",
       "name": "temporary",
       "width": 1000,
       "height": 1500,
+      "shapes":[[0,3]],
       "rectangles": [
         {
           "id": 3,
@@ -147,8 +149,8 @@
   ],
   "folders": [
     {
-      "id": 1,
-      "customerId": 1,
+      "id": "1",
+      "customerId":"1"
       "name": "food1",
       "dateCreated": "2021-03-19",
       "dateLastUsed": "2021-03-19",
@@ -170,8 +172,7 @@
       ]
     },
     {
-      "id": 2,
-      "customerId": 1,
+      "id": "2",
       "name": "food2",
       "dateCreated": "2021-03-19",
       "dateLastUsed": "2021-02-19",
@@ -211,14 +212,14 @@
       "id": 8
     },
     {
-      "customerId": 1,
       "name": "Hi",
+      "customerId":"1",
       "dateCreated": "2021-03-21",
       "dateLastUsed": "2021-03-21",
       "categories": [],
       "text": [],
       "image": [],
-      "id": 9
+      "id": "9"
     }
   ]
 }

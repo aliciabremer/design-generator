@@ -16,7 +16,7 @@ export class PinsComponent implements OnInit {
 
   newF:IPinFolder = {
       "id": 0,
-      "customerId": 0,
+      "customerId": "0",
       "name": "temporary",
       "dateCreated":"2021-03-21", //CHANGE TO GETTING DATE TODAY
       "dateLastUsed": "2021-03-21",

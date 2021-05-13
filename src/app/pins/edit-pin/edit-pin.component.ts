@@ -16,7 +16,7 @@ export class EditPinComponent implements OnInit {
 
   folder:any = {
       "id": 0,
-      "customerId": 0,
+      "customerId": "0",
       "name": "temporary",
       "dateCreated":"2021-03-21", //CHANGE TO GETTING DATE TODAY
       "dateLastUsed": "2021-03-21",
@@ -26,8 +26,9 @@ export class EditPinComponent implements OnInit {
      };
   id:number = 0;
   user:any = {
-      "id": 0,
+      "id": "0",
       "name": "",
+      "email":"",
       "templateId": "0",
       "folderId": "0",
       "textType": [],

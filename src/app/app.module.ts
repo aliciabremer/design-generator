@@ -17,6 +17,8 @@ import { CreateModule } from './create/create.module';
 import { TemplatesModule } from './templates/templates.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { AppFirebaseModule } from './app-firebase.module';
+import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { CoreModule } from './core/core.module';
     MatSidenavModule,
     FormsModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    AppFirebaseModule,
+    AppMaterialModule
     
   ],
   providers: [],

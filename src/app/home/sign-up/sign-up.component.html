@@ -1,0 +1,68 @@
+<div class="container">
+    <h1>Sign Up</h1>
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group">
+        <label for="nameInp">Name</label>
+        <input type="text" class="form-control" id="nameInp"
+               required
+               [(ngModel)]="userName" name="nameInp"
+               #name="ngModel">
+        <!-->
+        <div [hidden]="emailInp.valid || emailInp.pristine"
+             class="alert alert-danger">
+          Email is required
+        </div>
+        <-->
+      </div>
+      <div class="form-group">
+        <label for="emailInp">Email</label>
+        <input type="text" class="form-control" id="emailInp"
+               required
+               [(ngModel)]="email" name="emailInp"
+               #name="ngModel">
+        <!-->
+        <div [hidden]="emailInp.valid || emailInp.pristine"
+             class="alert alert-danger">
+          Email is required
+        </div>
+        <-->
+      </div>
+      <div class="form-group">
+        <label for="passWordInp">Password</label>
+        <input type="text" class="form-control" id="passWordInp"
+                       required
+                       [(ngModel)]="password" name="passWordInp"
+                       #name="ngModel">
+        <!-->
+        <div [hidden]="passWordInp.valid || passWordInp.pristine" class="alert alert-danger">
+          Password is required
+        </div>
+        <-->
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPass">Confirm Password</label>
+        <input type="text" class="form-control" id="confirmPass"
+                       required
+                       [(ngModel)]="checkPassword" name="confirmPass"
+                       #name="ngModel">
+        <!-->
+        <div [hidden]="confirmPass.valid || confirmPass.pristine" class="alert alert-danger">
+          Password is required
+        </div>
+        <-->
+        <div [hidden]="goodPassword()" class="alert alert-danger">
+        	<p>Passwords do not match</p>
+        </div>
+      </div>
+
+      <div [hidden]="!incorrect">
+          <p>Incorrect Login Information</p>
+        </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid || !goodPassword()">Submit</button>
+      
+    </form>
+    <button class="btn btn-leave" [routerLink]="['/home']">Cancel
+      </button>
+</div>

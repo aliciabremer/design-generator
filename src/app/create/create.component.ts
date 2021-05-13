@@ -57,11 +57,13 @@ export class CreateComponent implements OnInit {
   selectAllPins():void
   {
   	this.selectedF = this.fol;
+    console.log("selected all pins");
   }
 
   selectAllTemp() : void
   {
-  	this.selectedF = this.temps;
+  	this.selectedT = this.temps;
+    console.log("selected all templates");
   }
 
   getNumber(event: any) : void

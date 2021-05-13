@@ -1,8 +1,9 @@
 <app-header></app-header>
+
 <mat-sidenav-container class="tp-container">
-   <mat-sidenav mode = "side" opened>
+   <mat-sidenav mode = "side" opened *ngIf="(afAuth.user | async)" class="">
       <section class = "tp-section">
-         <a routerLink="/home">Home</a>
+         <a routerLink="/create">Create</a>
       </section>
       <section class = "tp-section">
          <a routerLink="/preferences">Preferences</a>
@@ -13,18 +14,10 @@
       <section class = "tp-section">
          <a routerLink="/folders">Pins</a>
       </section>
-      <section class = "tp-section">
-         <a routerLink="/create">Create</a>
-      </section>
-      <section class = "tp-section">
-         <a routerLink="/calender">Calender</a>
-      </section>
-      <section class = "tp-section">
-         <a routerLink="/insights">Insights</a>
-      </section>
    </mat-sidenav>
    <mat-sidenav-content>
-   		<router-outlet></router-outlet>
+      <router-outlet></router-outlet>
    </mat-sidenav-content>
 </mat-sidenav-container>
+
 <app-footer></app-footer>

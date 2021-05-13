@@ -1,1 +1,30 @@
-<h1>Pinning App: A Header</h1>
+<header>
+    <div class="wrapper">
+        <h1>Design<span class="color">123</span></h1>
+    </div>
+    
+    <div class="user" *ngIf="(afAuth.user | async)">
+    	<button mat-icon-button [matMenuTriggerFor]="menu" 
+    	#menuTrigger="matMenuTrigger" (mouseenter)="menuTrigger.openMenu()">
+    		<img src="../assets/profile-pic.png">
+    	</button>
+
+		<mat-menu #menu="matMenu" [overlapTrigger]="false" class="menu-drop">
+    		<span (mouseleave)="menuTrigger.closeMenu()">
+      				<div class="menu-item">
+      					<a routerLink="/account">My Account</a>
+      				</div>
+        			<div class="menu-item">
+      					<a routerLink="/preferences">My Preferences</a>
+      				</div>
+       				<div class="menu-item">
+       					<a (click)="logOut()" routerLink="/home">Log Out</a>
+       				</div>
+    		</span>
+		</mat-menu>
+
+    </div>
+
+</header>
+
+

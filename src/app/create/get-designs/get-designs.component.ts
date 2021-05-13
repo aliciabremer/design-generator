@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { IPinFolder, ITemplate } from '../../shared/interfaces';
 import { DrawService } from '../../core/draw.service';
@@ -46,27 +46,26 @@ export class GetDesignsComponent implements OnInit {
         }
     }
 
-    numbers:number[];
+    numbers:number[][];
 
   constructor() { 
-    this.numbers = Array(this.num).fill(1).map((x,i)=>i);
+    this.numbers = [[]];
+    console.log(this.folders);
+    console.log(this.templates);
+    
   }
 
   ngOnInit(): void {
   	//create random pairing of templates and folders [options: ]
+    console.log(this.folders);
+    console.log(this.templates);
+    for (let i: number = 0; i < this.num; i++) {
+            this.numbers[i] = [];
+            this.numbers[i][0] = Math.floor(Math.random()*this.folders.length);
+            this.numbers[i][1] = Math.floor(Math.random()*this.templates.length);
+        }
     console.log(this.num);
-  }
-
-  getRandomFolder(): IPinFolder
-  {
-  	var ind = Math.floor(Math.random()*this.folders.length);
-  	return this.folders[ind];
-  }
-
-  getRandomTemplate(): ITemplate
-  {
-  	var ind = Math.floor(Math.random()*this.templates.length);
-  	return this.templates[ind];
+    console.log(this.numbers);
   }
 
   download() : void

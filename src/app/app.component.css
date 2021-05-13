@@ -1,7 +1,7 @@
 .tp-container {
    height:90%;
    width:100%;
-   background: #eee;
+   background: white;
 }
 .tp-section {
    display: flex;
@@ -9,4 +9,9 @@
    align-items: center;
    margin-bottom: 20px;
    margin-right: 20px;  
+}
+
+.mat-drawer
+{
+	
 }

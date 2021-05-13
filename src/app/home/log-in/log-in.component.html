@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Log In</h1>
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group">
+        <label for="emailInp">Email</label>
+        <br />
+        <input type="text" class="form-control" id="emailInp"
+               required
+               [(ngModel)]="email" name="emailInp"
+               #name="ngModel">
+        <!-->
+        <div [hidden]="emailInp.valid || emailInp.pristine"
+             class="alert alert-danger">
+          Email is required
+        </div>
+        <-->
+      </div>
+      <div class="form-group">
+        <label for="passWordInp">Password</label>
+        <br />
+        <input type="text" class="form-control" id="passWordInp"
+                       required
+                       [(ngModel)]="password" name="passWordInp"
+                       #name="ngModel">
+        <!-->
+        <div [hidden]="passWordInp.valid || passWordInp.pristine" class="alert alert-danger">
+          Password is required
+        </div>
+        <-->
+      </div>
+
+      <div [hidden]="!incorrect">
+          <p class="bad">Incorrect Login Information</p>
+        </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+    </form>
+    <button class="btn btn-leave" [routerLink]="['/home']">Cancel
+      </button>
+</div>

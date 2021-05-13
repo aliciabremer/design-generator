@@ -21,7 +21,7 @@ export class EditTempComponent implements OnInit, AfterViewInit {
   id:number;
 
   user: IUser = {
-      "id": 0,
+      "id": "0",
     "name":"Your Name",
     "email":"JohnSmith@gmail.com",
     "templateId":0,

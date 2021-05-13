@@ -17,11 +17,12 @@ export class TemplatesComponent implements OnInit {
 
   newT:ITemplate = {
       "id": 0,
-      "customerId": 0,
+      "customerId": "0",
       "dateCreated":"2021-03-21",
       "name": "",
       "width": 1000,
       "height": 1500,
+      "shapes":[[0, 0]],
       "rectangles": [],
       "circles": [],
       "texts": [],

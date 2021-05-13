@@ -1,0 +1,9 @@
+.item {
+    float: left;
+    padding: 2%;
+} 
+
+.after
+{
+	float:none;
+}

@@ -18,11 +18,12 @@ export class DrawTempComponent implements AfterViewInit {
 
   private _template: ITemplate = {
       "id": 0,
-      "customerId": 0,
+      "customerId": "0",
       "dateCreated":"2021-03-21",
       "name": "temporary",
       "width": 0,
       "height": 0,
+      "shapes":[[0,0]],
       "rectangles": [],
       "circles": [],
       "texts": [],
@@ -30,7 +31,7 @@ export class DrawTempComponent implements AfterViewInit {
     };
 
     user: IUser = {
-    	"id": 0,
+    	"id": "0",
 		"name":"Your Name",
 		"email":"JohnSmith@gmail.com",
 		"templateId":0,

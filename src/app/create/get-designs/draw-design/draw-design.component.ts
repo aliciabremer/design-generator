@@ -16,12 +16,13 @@ import { ITemplate, IRectangle, ICircle, IText, IImage, IPinFolder, IUser } from
 export class DrawDesignComponent implements AfterViewInit {
 
   private _template: ITemplate = {
-      "id": 0,
+      "id": "0",
       "customerId": 0,
       "dateCreated":"2021-03-21",
       "name": "temporary",
       "width": 0,
       "height": 0,
+      "shapes":[[0,0]],
       "rectangles": [],
       "circles": [],
       "texts": [],
@@ -98,8 +99,10 @@ export class DrawDesignComponent implements AfterViewInit {
 
   ngAfterViewInit(): void 
   {
-
+  	console.log("The template");
     console.log(this.template);
+    console.log("This folder");
+    console.log(this.folder);
     console.log(<HTMLCanvasElement>document.getElementById(this.template.name));
   	var c = <HTMLCanvasElement>document.getElementById(this.template.name);
   	c.height = this.template.height*this.scaling;

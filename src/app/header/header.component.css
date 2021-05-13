@@ -1,0 +1,48 @@
+header {
+    height: 5%;
+    padding-bottom:30px;
+    border-bottom: #424242 solid 3px;
+}
+header h1 {
+    float: left;
+    margin-top: 16px;
+}
+header h1 .color {
+    color: #ab1d79;
+}
+
+.user {
+	float:right;
+	text-align: center;
+  	min-width: 240px;
+  	padding: 15px 20px 20px;
+}
+.avatar {
+  margin-left: 5px;
+}
+
+
+p {
+  color: #666666;
+}
+
+.menu-item
+{
+	text-align:center;
+	margin-top:5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.menu-drop
+{
+	margin-top:5px;
+	background-color:white;
+	color:white;
+}
+
+.mat-typography
+{
+	color:white;
+}
