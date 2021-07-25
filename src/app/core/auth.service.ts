@@ -6,9 +6,10 @@ import { switchMap, first } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService 
+{
   
-  userData: any;
+  userData: any = null;
 
   /**
    * Constructor for this class - creating injectables
@@ -18,12 +19,15 @@ export class AuthService {
    */
   constructor(private afAuth: AngularFireAuth) 
   {
-    this.userData = afAuth.authState;
+    this.afAuth.authState.subscribe((auth) => {
+      this.userData = auth
+    });
   }
 
   /**
    * Signs user up for a new account with their email and password
    * 
+   * @param name - the user's name
    * @param email - the user's inputted email
    * @param password - the user's inputted email
    * @returns true if user signed up successfully; false otherwise
@@ -36,12 +40,12 @@ export class AuthService {
   	.then(res => {
   		console.log('You are successfully signed up!'+ res);
   		ret = true; 
+      this.logInWithEmail(email, password);
   	})
   	.catch(error => {
   		console.log('Something is very wrong: '+ error.message);
   		ret = false;
   	});
-    this.logInWithEmail(email, password);
   	return ret;
   }
 
@@ -76,6 +80,22 @@ export class AuthService {
   logout(): void 
   {
     this.afAuth.signOut();
+  }
+
+  /**
+   * Get the current user's id
+   * 
+   * @returns user's id
+   */
+  getId():Observable<string>
+  {
+    console.log((this.userData !== null) ? this.userData.email.substring(0, this.userData.email.indexOf(".")) : '');
+    return of((this.userData !== null) ? this.userData.email.substring(0, this.userData.email.indexOf(".")) : '');
+  }
+
+  updateEmail():string
+  {
+    return "";
   }
 
 }

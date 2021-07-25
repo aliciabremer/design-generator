@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireDatabaseModule, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { IUser, ITemplate, IPinFolder } from '../../app/shared/interfaces';
@@ -10,109 +10,73 @@ import { IUser, ITemplate, IPinFolder } from '../../app/shared/interfaces';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService 
+{
 
-    baseUrl: string = '/api/';
+    //baseUrl: string = '/api/';
     
     /**
      * Constructor for this class - creating injectables
      *
-     * @param http - injectable AuthService
+     * @param http - injectable HttpClient
      * @param db - injectable Router
      * @returns void
      */
     constructor(private http: HttpClient,
-                private db: AngularFireDatabaseModule ) 
-    {  }
-
-    /*
-    getUsers() : Observable<IUser[]> {
-        console.log("getting users " + this.baseUrl+"users");
-        return this.http.get<IUser[]>(this.baseUrl+"users")
-            .pipe(
-                catchError(this.handleError)
-            );
-    }
-
-    getUser(id:number) : Observable<IUser> {
-      console.log("getting user - of id");
-      return this.http.get<IUser[]>(this.baseUrl + 'users')
-        .pipe(
-          map(users => {
-            let user = users.filter((u: IUser) => u.id === id);
-            return user[0];
-          }),
-          catchError(this.handleError)
-        )
-    }
-
-    changeUser(user:IUser):void {
-      this.http.put(this.baseUrl + 'users/'+user.id, user).subscribe(data => {
-        console.log(data);
-      });
-    }
-    */
+                private db: AngularFireDatabase) 
+    { }
 
     /**
      * Get the user from the database
      *
-     * @param id - the authToken of the user
+     * @param id - the authentication token of the user
      * @returns the user's information from the database as an Observable
      */
     getUser(id:string) : Observable<IUser>
     {
-      var itemsRef: any;
       var items: Observable<IUser>;
 
-      itemsRef = this.db.ref('users/'+id);
-      items = itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
+      items = this.db.object('users/'+id).snapshotChanges()
+      .pipe(
+        map((u:any) => {
+            let user: IUser = {...JSON.parse(u.payload.val())};
+            return user;
+          }),
+        catchError(this.handleError)
+      );
       return items;
     }
 
     /**
      * Updates the user's information in the database
      *
+     * @param id - the authentication token of the user
      * @param user - the information about the user
-     * @returns the user's information from the database as an Observable
+     * @returns void
      */
-    changeUser(user:IUser) : Observable<IUser>
+    changeUser(id:string, user:IUser):void
     {
-      var itemsRef: any;
-      var items: Observable<IUser>;
-
-      itemsRef = this.db.ref('users/' + user.id);
-      itemsRef.set(user);
-      items = itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
-      return items;
+      this.db.object('users').update({[id]: JSON.stringify(user)});
     }
 
     /**
      * Create a new user in the database using their token id and name.
      *
-     * @param userId - the authToken of the user
+     * @param userId - the authentication token of the user
      * @param userName - the name of the user
-     * @returns the user's information from the database as an Observable
+     * @returns void
      */
-    addUser(userId:string, userName:string) : Observable<IUser>
+    addUser(userId:string, userName:string) : void
     {
-      var itemsRef: any;
-      var items: Observable<IUser>;
+      //console.log("adding user " + userId +" " + userName);
 
-      var user:IUser = {
-        "id":id,
-        "name": name,
+      this.db.object('users/' + userId).set(JSON.stringify({
+        "name": userName,
         "textType": ["title"],
         "colours":["white", "black"],
         "fonts": ["arial"]
-      };
-
-      itemsRef = this.db.ref('users/' + user.id);
-      itemsRef.set(user);
-      items = itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
-      return items;
+      }));
+      //console.log(this.db.object('users/'+userId));
     }
 
     /**
@@ -123,62 +87,8 @@ export class DataService {
      */
     deleteUser(id:string) : void
     {
-      this.db.ref('users/'+id).remove();
+      this.db.object('users/'+id).remove();
     }
-    
-    /*
-    getTemplates(id:number) : Observable<ITemplate[]> {
-      console.log("getting templates");
-      return this.http.get<ITemplate[]>(this.baseUrl + 'templates')
-        .pipe(
-          map(templates => {
-            let temp = templates.filter((t: ITemplate) => t.customerId === id);
-            return temp;
-          }),
-          catchError(this.handleError)
-        )
-    }
-
-    getTemplate(id:number) : Observable<ITemplate> {
-      console.log("getting a folder");
-      return this.http.get<ITemplate[]>(this.baseUrl + 'templates')
-        .pipe(
-          map(templates => {
-            let templateReq = templates.filter((t: ITemplate) => t.id === id);
-            return templateReq[0];
-          }),
-          catchError(this.handleError)
-        );
-    }
-
-    changeTemplate(temp:ITemplate): Observable<ITemplate> {
-      console.log("updating a template");
-      return this.http.put<ITemplate>(this.baseUrl + 'templates/'+temp.id, temp);
-    }
-
-    addTemplate(id:number) : Observable<ITemplate> {
-      var obj = 
-      {
-      "customerId": id,
-      "dateCreated":"2021-03-21",
-      "name": "",
-      "width": 1000,
-      "height": 1500,
-      "rectangles": [],
-      "circles": [],
-      "texts": [],
-      "images": []
-    };
-      return this.http.post<ITemplate>((this.baseUrl + 'templates/'), JSON.stringify(obj));
-    }
-
-    deleteTemplate(id:number) : void {
-      console.log("deleting a template");
-      this.http.delete(this.baseUrl + 'templates/'+id).subscribe(data => {
-          console.log(data);
-        });
-    }
-    */
 
     /**
      * Get a list of templates for a customer from the database
@@ -188,29 +98,27 @@ export class DataService {
      */
     getTemplates(customerId:string) : Observable<ITemplate[]> 
     {
-      var itemsRef: any;
       var items: Observable<ITemplate[]>;
+      //console.log("getting templates");
 
-      itemsRef = this.db.ref('templates/').equalTo(customerId);
-      items = this.itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
-      return items;
-    }
-
-    /**
-     * Get a template from database.
-     *
-     * @param id - the id of the template
-     * @returns the template from the database as an Observable
-     */
-    getTemplate(id:string) : Observable<ITemplate> 
-    {
-      var itemsRef: any;
-      var items: Observable<ITemplate>;
-
-      itemsRef = this.db.ref('templates/'+id);
-      items = this.itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
+      items = this.db.list('templates').snapshotChanges()
+      .pipe(
+        map((templates: any[]) => {
+          let listOf: ITemplate[] = [];
+          templates.map( (t:any) => {
+            //console.log("getting template ");
+            //console.log(t.payload.val());
+            //console.log(JSON.parse(t.payload.val()));
+            let newTemp: ITemplate = {id:t.payload.key, ...JSON.parse(t.payload.val())};
+            if (newTemp.customerId===customerId)
+            {
+              listOf.push(newTemp); 
+            }
+          });
+          return listOf;
+        }),
+        catchError(this.handleError)
+      );
       return items;
     }
 
@@ -218,19 +126,25 @@ export class DataService {
      * Updates the template in the database
      *
      * @param temp - the updated template
-     * @returns the template from the database as an Observable
+     * @returns void
      */
-    changeTemplate(temp:ITemplate): Observable<ITemplate>
+    changeTemplate(temp:any): void
     {
-
-      var itemsRef: any;
-      var items: Observable<IUser>;
-
-      itemsRef = this.db.ref('templates/' + temp.id);
-      itemsRef.set(temp);
-      items = itemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
-      return items;
+      //console.log(this.db.object('templates/'+temp.id));
+      var copy = {
+        "customerId": temp.customerId,
+        "dateCreated": temp.dateCreate, //change this to current date
+        "name": temp.name,
+        "categories": temp.categories,
+        "width": temp.width,
+        "height": temp.height,
+        "shapes":temp.shapes,
+        "rectangles": temp.rectangles,
+        "circles": temp.circles,
+        "texts": temp.texts,
+        "images": temp.images
+      };
+      this.db.object('templates/').update({[temp.id]: JSON.stringify(copy)});
     }
 
     /**
@@ -238,158 +152,159 @@ export class DataService {
      *
      * @param userId - the id (authToken) of the user
      * @param tempName - the name of the template
+     * @param tempCategories - the list of the categories of the template
      * @param tempWidth - the width of the template
      * @param tempHeight - the height of the template
-     * @returns the template created in the database as an Observable
+     * @returns the key of the template
      */
-    addTemplate(userId:string, tempName:string, tempWidth:number, tempHeight:number) : Observable<ITemplate> 
+    addTemplate(userId:string, tempName:string, tempCategories:string[], tempWidth:number, tempHeight:number) : string
     {
-      var itemsRef: any;
-      var newItemsRef:any;
-      var items: Observable<IUser>;
+      //console.log(JSON.stringify({
+      //  "customerId": userId,
+      //  "dateCreated": this.getDate(), //change this to current date
+      //  "name": tempName,
+      //  "categories": tempCategories,
+      //  "width": tempWidth,
+      //  "height": tempHeight,
+      //  "shapes":[[]],
+      //  "rectangles": [],
+      //  "circles": [],
+      //  "texts": [],
+      //  "images": []
+      //}));
 
-      itemsRef = this.db.ref('templates/');
-      newItemsRef = itemsRef.push();
-      newItemsRef.set({
+      var itemsRef = this.db.list('templates').push(JSON.stringify({
         "customerId": userId,
-        "dateCreated":"2021-03-21", //change this to current date
+        "dateCreated": this.getDate(), //change this to current date
         "name": tempName,
+        "categories": tempCategories,
         "width": tempWidth,
         "height": tempHeight,
+        "shapes":[[]],
         "rectangles": [],
         "circles": [],
         "texts": [],
         "images": []
-      });
-      items = newItemsRef.valueChanges();
-      items.subscribe(res=> console.log(res));
-      return items;
+      }));
+
+      let token = itemsRef.key;
+      if (token)
+        return token;
+      return "";
     }
 
     /**
      * Deletes a template from the database.
      *
-     * @param id - the id of the template
+     * @param key - the key of the template
      * @returns void
      */
-    deleteTemplate(id:number) : void 
+    deleteTemplate(key:string) : void 
     {
-      this.db.ref('templates/'+id).remove();
+      this.db.object('templates/'+key).remove();
     }
 
-    /*
-    getFolders(id:number) : Observable<IPinFolder[]> {
-      console.log("getting folders");
-      return this.http.get<IPinFolder[]>(this.baseUrl + 'folders')
-        .pipe(
-          map(folders => {
-            let userFolders = folders.filter((f: IPinFolder) => f.customerId === id);
-            return userFolders;
-          }),
-          catchError(this.handleError)
-        );
+    /**
+     * Get a list of folders for a customer from the database
+     *
+     * @param customerId - the authToken (id) of the user
+     * @returns list of the user's folders from the database as an Observable
+     */
+    getFolders(customerId:string) : Observable<IPinFolder[]> 
+    {
+      var items: Observable<IPinFolder[]>;
+
+      items = this.db.list('folders').snapshotChanges()
+      .pipe(
+        map((folders: any[]) => {
+          let listOf: IPinFolder[] = [];
+          folders.map( (f:any) => {
+            //console.log("getting folder ");
+            //console.log(f.payload.val());
+            //console.log(JSON.parse(f.payload.val()));
+            let newF: IPinFolder = {id:f.payload.key, ...JSON.parse(f.payload.val())};
+            if (newF.customerId===customerId)
+            {
+              listOf.push(newF); 
+            }
+          });
+          return listOf;
+        }),
+        catchError(this.handleError)
+      );
+       items.subscribe(res=> console.log(res));
+      return items;
+    }
+    
+    /**
+     * Create a new template in the database for a customer
+     *
+     * @param userId - the id (authToken) of the user
+     * @param fName - the name of the folder
+     * @param fCategories - the list of the categories the folder is in
+     * @param fText - a list of text options for each type of text
+     * @param fImages - a list of the image locations
+     * @returns void
+     */
+    addFolder(userId:string, fName:string, fCategories:string[], fText:string[][], fImages:string[]) : void
+    {
+      var itemsRef = this.db.list('folders').push(JSON.stringify({
+        "customerId": userId,
+        "name": fName,
+        "dateCreated":this.getDate(),
+        "dateLastUsed": this.getDate(),
+        "categories": fCategories,
+        "text":fText,
+        "image":fImages
+      }));
+
     }
 
-    getFolder(id:number) : Observable<IPinFolder> {
-      console.log("getting a folder");
-      return this.http.get<IPinFolder[]>(this.baseUrl + 'folders')
-        .pipe(
-          map(folders => {
-            let userFolders = folders.filter((f: IPinFolder) => f.id === id);
-            return userFolders[0];
-          }),
-          catchError(this.handleError)
-        );
-    }
-
-    addFolder(id:number) : Observable<IPinFolder> {
-
-      var obj = 
-      {
-      "customerId": id,
-      "name": "temporary",
-      "dateCreated":"2021-03-21", //CHANGE TO GETTING DATE TODAY
-      "dateLastUsed": "2021-03-21",
-      "categories": [],
-      "text":[],
-       "image":[]
-     };
-
-      return this.http.post<IPinFolder>((this.baseUrl + 'folders/'), obj);
-    }
-
-    changeFolder(folder:IPinFolder) : Observable<IPinFolder> {
-      console.log("updating a folder");
-      return this.http.put<IPinFolder>(this.baseUrl + 'folders/'+folder.id, folder);
+    /**
+     * Updates the folder in the database
+     *
+     * @param folder - the updated folder
+     * @returns void
+     */
+    changeFolder(folder:any) : void
+    {
+      var key: string = folder.id;
+      delete folder.id;
+      this.db.object('folders/').update({[key]: JSON.stringify(folder)});
     }
 
     
-
-    deleteFolder(id:number) : void {
-      console.log("deleting a folder");
-      this.http.delete(this.baseUrl + 'folders/'+id).subscribe(data => {
-          console.log(data);
-        });
-    }
-    */
-
-    
-    getFolders(id:number) : Observable<IPinFolder[]> {
-      console.log("getting folders");
-      return this.http.get<IPinFolder[]>(this.baseUrl + 'folders')
-        .pipe(
-          map(folders => {
-            let userFolders = folders.filter((f: IPinFolder) => f.customerId === id);
-            return userFolders;
-          }),
-          catchError(this.handleError)
-        );
+    /**
+     * Deletes a folder from the database.
+     *
+     * @param key - the key of the folder
+     * @returns void
+     */
+    deleteFolder(key:string) : void 
+    {
+       this.db.object('folders/'+key).remove();
     }
 
-    getFolder(id:number) : Observable<IPinFolder> {
-      console.log("getting a folder");
-      return this.http.get<IPinFolder[]>(this.baseUrl + 'folders')
-        .pipe(
-          map(folders => {
-            let userFolders = folders.filter((f: IPinFolder) => f.id === id);
-            return userFolders[0];
-          }),
-          catchError(this.handleError)
-        );
-    }
-
-    addFolder(id:number) : Observable<IPinFolder> {
-
-      var obj = 
-      {
-      "customerId": id,
-      "name": "temporary",
-      "dateCreated":"2021-03-21", //CHANGE TO GETTING DATE TODAY
-      "dateLastUsed": "2021-03-21",
-      "categories": [],
-      "text":[],
-       "image":[]
-     };
-
-      return this.http.post<IPinFolder>((this.baseUrl + 'folders/'), obj);
-    }
-
-    changeFolder(folder:IPinFolder) : Observable<IPinFolder> {
-      console.log("updating a folder");
-      return this.http.put<IPinFolder>(this.baseUrl + 'folders/'+folder.id, folder);
-    }
-
-    
-
-    deleteFolder(id:number) : void {
-      console.log("deleting a folder");
-      this.http.delete(this.baseUrl + 'folders/'+id).subscribe(data => {
-          console.log(data);
-        });
+    /**
+     * Gets the current date.
+     *
+     * @returns the date today in the form YYYY-MM-DD
+     */
+    private getDate():string
+    {
+      var MyDate = new Date();
+      return MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
     }
 
 
-    private handleError(error: any) {
+    /**
+     * Handles errors and returns an observablew with the error
+     *
+     * @param error - the error
+     * @returns Observable
+     */
+    private handleError(error: any) 
+    {
       console.error('server error:', error);
       if (error.error instanceof Error) {
           const errMessage = error.error.message;

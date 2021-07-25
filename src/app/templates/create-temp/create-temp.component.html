@@ -1,1 +1,34 @@
-<p>create-temp works!</p>
+<div class="top">
+	<div class="left">
+		<h2>Create Template</h2>
+	</div>
+	<div class="buttons">
+		<button (click)="cancel()">Cancel</button>
+		<button (click)="done()">Done</button>
+	</div>
+</div>
+<br />
+<br />
+<div class="inputting">
+	<div class="editing">
+		<label for="title">Name</label>
+		<input class="edit-title" id="title" name="title" type="text" [(ngModel)] = "tName">
+	</div>
+	
+	<div class="editing">
+		<label>Categories</label>
+		<div *ngFor="let c of tCategories;let indexOfElement=index;trackBy:trackByIndex;">
+			<input name=a{{indexOfElement}} type="text" [(ngModel)] = "tCategories[indexOfElement]">
+			<button (click)="removeCategory(indexOfElement)">Remove Category</button>
+		</div>
+		<button (click)="addCategory()">Add Category</button>
+	</div>
+	<div class="editing">
+		<label for="width">Width</label>
+		<input class="edit-width" id="width" name="width" type="number" [(ngModel)] = "tWidth" min="0" max="100000" value="0">
+	</div>
+	<div class="editing">
+		<label for="height">Height</label>
+		<input class="edit-height" id="height" name="height" type="number" [(ngModel)] = "tHeight" min="0" max="100000" value="0">
+	</div>
+</div>

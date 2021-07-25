@@ -1,3 +1,9 @@
 <h1>Folders</h1>
 <br />
-<app-pins-list [folders]="f" (createNew)="onNew($event)"></app-pins-list>
+<button class="create-button" (click)="create()">Create A Folder</button>
+<div class="edit" *ngIf="editing">
+	<div class="pop-up-box">
+		<app-edit-pin [textTypes]="user.textType" [(fName)]="selectedF.name" [(fCategories)]="selectedF.categories" [(fText)]="selectedF.text" [(fImages)]="selectedF.image" (updateAndDone)="doneEditing($event)"></app-edit-pin>
+	</div>
+</div>
+<app-pins-list [folders]="f" (selectFolder)="editFolder($event)"></app-pins-list>

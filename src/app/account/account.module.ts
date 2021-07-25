@@ -9,6 +9,7 @@ import { AccountRoutingModule } from './account-routing.module';
   imports: [
     CommonModule,
     AccountRoutingModule
-  ]
+  ],
+  exports: [AccountComponent]
 })
 export class AccountModule { }

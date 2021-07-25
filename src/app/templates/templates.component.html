@@ -1,4 +1,20 @@
 <h1>Templates</h1>
 <br />
-<app-templates-list [templates]="templates" (createNew)="onNew($event)"></app-templates-list>
-<!--FIX SO CAN DISPLAY MOER THAN ONE PROPERLY-->
+<button class="create-button" (click)="create()">Create A Template</button>
+<br />
+<div class="create" *ngIf="creatingNew">
+	<div class="pop-up-box-create">
+		<app-create-temp [(tName)]="selectedT.name" [(tCategories)]="selectedT.categories" [(tWidth)]="selectedT.width" [(tHeight)]="selectedT.height" (finished)="doneCreating($event)"></app-create-temp>
+	</div>
+</div>
+<div class="edit" *ngIf="editing">
+	<div class="pop-up-box-edit">
+		<div id="box">
+			<app-edit-temp [user]="user" [(template)]="selectedT" (updateAndDone)="doneEditing($event)"></app-edit-temp>
+		</div>
+	</div>
+</div>
+<app-templates-list [templates]="templates" (selectTemplate)="editFolder($event)"></app-templates-list>
+
+<!--><app-templates-list [templates]="templates" (createNew)="onNew($event)"></app-templates-list></-->
+<!-->FIX SO CAN DISPLAY MOER THAN ONE PROPERLY</-->

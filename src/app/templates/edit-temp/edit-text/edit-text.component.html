@@ -2,14 +2,16 @@
 <br />
 <br />
 <div>
-	<h4>X position</h4>
+	<label for="xRange">X position</label>
 	<input type="range" min="0" max="{{width}}" value="{{text.x}}" class="slider" id="xRange" (change)="getXPos($event)" (oninput)="getXPos($event)">
-	<h4>Y position</h4>
+	<label for="yRange">Y position</label>
 	<input type="range" min="0" max="{{height}}" value="{{text.y}}" class="slider" id="yRange" (change)="getYPos($event)" (oninput)="getYPos($event)">
-	<h4>Width</h4>
+	<label for="width">Width</label>
 	<input type="range" min="0" max="{{width}}" value="{{text.maxWidth}}" class="slider" id="width" (change)="getXWidth($event)" (oninput)="getXWidth($event)">
-	<h4>Height</h4>
+	<label for="height">Height</label>
 	<input type="range" min="0" max="{{height}}" value="{{text.height}}" class="slider" id="height" (change)="getYHeight($event)" (oninput)="getYHeight($event)">
+	<label for="size">Font Size</label>
+	<input type="range" min="0" max="{{width}}" value="{{text.size}}" class="slider" id="size" (change)="getFontSize($event)" (oninput)="getFontSize($event)">
 	<!--Fix value-->
 </div>
 <div>
@@ -30,5 +32,14 @@
     	<option [value]="indexOfElement" *ngFor="let i of textTypes;let indexOfElement=index;trackBy:trackByIndex;">{{i}}</option>
 	</select>
 </div>
+<!-->
+<div>
+	<label>Order</label>
+	<button (click)="sendToBack()">Send to back</button>
+	<button (click)="sendBackward()">Send Backward</button>
+	<button (click)="sendForward()">Send Forward</button>
+	<button (click)="sendToFront()">Sent to front</button>
+</div>
+<!-->
 <button (click)="finished()">Done</button>
 <button (click)="delete()">Delete</button>

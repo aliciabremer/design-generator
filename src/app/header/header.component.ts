@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
@@ -8,24 +8,30 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent
+{
 
 	/**
-	 * This component takes in input called isLoggedIn, which is a boolean
-	 * that is true if the user is logged in and false otherwise.
-	 */
-
+   * Constructor for this class - creating injectables and initializing global variables
+   *
+   * @param afAuth - injectable AngularFireAuth
+   * @param auth - injectable AuthService
+   * @param router - injectable Router
+   * @returns void
+   */
   constructor(public afAuth:AngularFireAuth,
   	private auth:AuthService,
   	private router:Router ) { }
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Log the user out and return to the homepage after 0.5 seconds.
+   *
+   * @returns void
+   */
   logOut():void
   {
   	this.auth.logout();
-    setTimeout(() => this.router.navigateByUrl("/home"), 1000);
+    setTimeout(() => this.router.navigateByUrl("/home"), 500);
   }
 
 }

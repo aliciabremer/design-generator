@@ -1,27 +1,28 @@
 <h2>Editing User Preferences</h2>
-<h4>Website name/handle</h4> 
-<input type="text" [(ngModel)] = "user.webName">
 <h4>Colours</h4>
 <div *ngFor="let c of user.colours;let indexOfElement=index;trackBy:trackByIndex;">
-	<input name=a{{indexOfElement}} type="text" [(ngModel)] = "user.colours[indexOfElement]">
-	<button (click)="removeColour(indexOfElement)">Remove colour</button>
+	<input name=a{{indexOfElement}} type="color" [(ngModel)] = "user.colours[indexOfElement]">
+	<button (click)="removeColour(indexOfElement)" class="remove">-</button>
 </div>
 <button (click)="addColour()">Add Colour</button>
 <br>
 <h4>Text Types</h4>
 <div *ngFor="let t of user.textType; let indexOfElement=index;trackBy:trackByIndex;">	
 	<input name=a{{indexOfElement}} type="text" [(ngModel)] = "user.textType[indexOfElement]">
-	<button (click)="removeTextType(indexOfElement)">Remove Text Types</button>
+	<button (click)="removeTextType(indexOfElement)" class="remove">-</button>
 </div>
 <button (click)="addTextType()">Add Text Type</button>
 <br>
 <h4>Fonts</h4>
 <div *ngFor="let f of user.fonts;let indexOfElement=index;trackBy:trackByIndex;">
-	<input name=a{{indexOfElement}} type="text" [(ngModel)] = "user.fonts[indexOfElement]">
-	<button (click)="removeFont(indexOfElement)">Remove Font</button>
+	<select name=a{{indexOfElement}} id="font-select" [(ngModel)]="user.fonts[indexOfElement]" class="select-page" [style.font-family] = "user.fonts[indexOfElement]">
+		<app-filter-fonts (changed)="filter($event)"></app-filter-fonts>
+        <option [value]="i" *ngFor="let i of filteredFonts">{{i}}</option>
+    </select>	
+	<button (click)="removeFont(indexOfElement)" class="remove">-</button>
 </div>
 <button (click)="addFont()">Add Font</button>
 <br>
-<button (click)="changePreferences()" [routerLink]="['../preferences']">Finish Editing</button>
+<button (click)="changePreferences()" [routerLink]="['../preferences']" class="done">Finish Editing</button>
 
 <!--Need to fix updating of lists................................. can only type one letter.-->

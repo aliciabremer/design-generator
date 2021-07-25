@@ -1,6 +1,6 @@
 <header>
     <div class="wrapper">
-        <h1>Design<span class="color">123</span></h1>
+        <h1>Template<span class="color">Time</span></h1>
     </div>
     
     <div class="user" *ngIf="(afAuth.user | async)">
@@ -11,9 +11,6 @@
 
 		<mat-menu #menu="matMenu" [overlapTrigger]="false" class="menu-drop">
     		<span (mouseleave)="menuTrigger.closeMenu()">
-      				<div class="menu-item">
-      					<a routerLink="/account">My Account</a>
-      				</div>
         			<div class="menu-item">
       					<a routerLink="/preferences">My Preferences</a>
       				</div>

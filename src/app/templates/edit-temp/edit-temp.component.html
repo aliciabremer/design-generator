@@ -1,26 +1,37 @@
-<h3>{{template.name}}</h3>
-<div class="item">
-	<div class="boxes">
-		<canvas id="square" width="50" height="50" (click)="addRect()">Canvas not supported by browser</canvas>
+<div class="top">
+	<div class="left">
+		<h2>{{template.name}}</h2>
 	</div>
-	<div class="boxes">
-		<canvas id="circle" width="50" height="50" (click)="addCircle()">Canvas not supported by browser</canvas>
+
+	<div class="buttons">
+		<button (click)="tryToDelete()">Delete</button>
+		<button (click)="cancel()">Cancel</button>
+		<button (click)="done()">Done</button>
+
+		<div class="confirm-delete" *ngIf="deleting">
+			<p>Are you sure you want to delete</p>
+			<button (click)="delete()">Yes</button>
+			<button (click)="cancelDelete()">No</button>
+		</div>
+
 	</div>
-	<div class="boxes">
-		<canvas id="text" width="50" height="50" (click)="addText()">Canvas not supported by browser</canvas>
-	</div>
-	<div class="boxes">
-		<canvas id="image" width="50" height="50" (click)="addImage()">Canvas not supported by browser</canvas>
-	</div>
+	
 </div>
-<div class="item">
-	<canvas [attr.id]="template.name" width="300" height="150" style="border:1px solid #000000;">Canvas not supported by browser</canvas>
+<div class="break">
+	<br />
 </div>
-<app-edit-rect *ngIf="isRect" [rect]="template.rectangles[shapeId]" (updatedRect)="updateRect($event)" [colours]="coloursGray" [width]="template.width" [height]="template.height" (editing)="isRect=$event" (deleting)="delete($event, 0)"></app-edit-rect>
-<app-edit-circ *ngIf="isCircle" [circ]="template.circles[shapeId]" (updatedCircle)="updateCircle($event)" [colours]="coloursGray" [width]="template.width" [height]="template.height" (editing)="isCircle=$event" (deleting)="delete($event, 1)"></app-edit-circ>
-<app-edit-text *ngIf="isText" [text]="template.texts[shapeId]" (updatedText)="updateText($event)" [colours]="coloursGray" [width]="template.width" [height]="template.height" [fonts]="user.fonts" [textTypes]="user.textType" (editing)="isText=$event" (deleting)="delete($event, 2)"></app-edit-text>
-<app-edit-image *ngIf="isImage" [img]="template.images[shapeId]" (updatedImage)="updateImage($event)" [width]="template.width" [height]="template.height" (editing)="isImage=$event" (deleting)="delete($event, 3)"></app-edit-image>
-<div class = "end">
-	<button (click)="changePreferences()" [routerLink]="['/templates']">Done</button>
-	<button [routerLink]="['/templates']">Cancel</button>
+<div class="menu">
+	<app-menu (addNewElement)="addElement($event)"></app-menu>
 </div>
+
+<div class="editing">
+	<canvas [attr.id]="template.name" width="300" height="150" style="border:1px solid #000000;" (click)="getClick($event)">Canvas not supported by browser</canvas>
+</div>
+
+<div class="change">
+	<app-edit-rect *ngIf="isRect" [rect]="template.rectangles[shapeId]" (rectChange)="updateRect($event)" [(shapes)]="template.shapes" [colours]="coloursGray" [width]="template.width" [height]="template.height" (editing)="isRect=$event" (deleting)="deleteShape($event, 0)"></app-edit-rect>
+	<app-edit-circ *ngIf="isCirc" [circ]="template.circles[shapeId]" (circChange)="updateCircle($event)" [(shapes)]="template.shapes" [colours]="coloursGray" [width]="template.width" [height]="template.height" (editing)="isCirc=$event" (deleting)="deleteShape($event, 1)"></app-edit-circ>
+	<app-edit-text *ngIf="isText" [text]="template.texts[shapeId]" (textChange)="updateText($event)" [(shapes)]="template.shapes" [colours]="coloursGray" [width]="template.width" [height]="template.height" [fonts]="user.fonts" [textTypes]="user.textType" (editing)="isText=$event" (deleting)="deleteShape($event, 2)"></app-edit-text>
+	<app-edit-image *ngIf="isImage" [img]="template.images[shapeId]" (imgChange)="updateImage($event)" [(shapes)]="template.shapes" [width]="template.width" [height]="template.height" (editing)="isImage=$event" (deleting)="deleteShape($event, 3)"></app-edit-image>
+</div>
+

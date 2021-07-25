@@ -1,27 +1,91 @@
 <h1>Generate Designs</h1>
-<div class = "block">
-	<h3>Select Templates</h3>
-	<ul class="templates">
-		<li class = "item" (click)="selectAllTemp()">All</li> 
-  		<li class = "item" *ngFor="let t of temps" (click)="addTemplate(t)">
-    		{{t.name}}
-  		</li>
-	</ul>
+
+<div class="prep" *ngIf="!doGenerate">
+
+	<div class="gen">
+		<button (click)="generate()">Generate Now</button>
+		<br />	
+		<label for="num">Number of Designs</label>
+		<br />
+		<input class="edit-num" id="num" name="height" type="number" [(ngModel)] = "num" min="0" max="100" value="0">
+		
+	</div>
+
+	<div class = "block-left">
+		<h3>Select Templates</h3>
+		<div>
+			<input type="checkbox" id="all" (change)="changeAllTemp($event)">
+			<label for="all">Select All</label>
+			<br />
+			<br />
+			<input type="checkbox" id="cat" (change)="changeCategoryTemp($event)">
+			<label for="cat">Select By Category</label>
+			<br />
+			<br />
+			<div class="select-category" *ngIf="!selectAllT && !selectIndividualT && selectCategoryT">
+				<div *ngFor="let c of tempCategories">
+					<input type="checkbox" id="c" (change)="addTempCategory(c, $event)">
+					<label for="c">{{c}}</label>
+					<br />
+				</div>
+			</div>
+
+			<input type="checkbox" id="indiv-t" (change)="changeIndividualTemp($event)">
+			<label for="indiv-t">Select Individually</label>
+			<br />
+			<br />
+			<div *ngIf="!selectAllT && !selectCategoryT && selectIndividualT">
+				<div *ngFor="let t of temps">
+					<input type="checkbox" id="t" (change)="addTemplate(t, $event)">
+					<label for="t">{{t.name}}</label>
+					<br />
+				</div>
+			</div>
+			
+		</div>
+		<h4>Number Selected: {{ selectedT.length }}</h4>
+	</div>
+
+	<div class = "block-right">
+		<h3>Select Folders</h3>
+		<div> 
+	  		<input type="checkbox" id="all" (change)="changeAllFol($event)">
+			<label for="all">Select All</label>
+			<br />
+			<br />
+			<input type="checkbox" id="cat" (change)="changeCategoryFol($event)">
+			<label for="cat">Select By Category</label>
+			<br />
+			<br />
+			<div class="select-category" *ngIf="!selectAllF && !selectIndividualF && selectCategoryF">
+				<div *ngFor="let c of folderCategories">
+					<input type="checkbox" id="c" (change)="addFolCategory(c, $event)">
+					<label for="c">{{c}}</label>
+					<br />
+					<br />
+				</div>
+			</div>
+
+			<input type="checkbox" id="indiv-f" (change)="changeIndividualFol($event)">
+			<label for="indiv-f">Select Individually</label>
+			<br />
+			<br />
+			<div *ngIf="!selectAllF && !selectCategoryF && selectIndividualF">
+				<div *ngFor="let f of fol">
+					<input type="checkbox" id="f" (change)="addFolder(f, $event)">
+					<label for="f">{{f.name}}</label>
+					<br />
+					<br />
+				</div>
+			</div>
+		</div>
+		<h4>Number Selected: {{ selectedF.length }}</h4>
+	</div>
+	
 </div>
-<div class = "block">
-	<h3>Select Folders</h3>
-	<ul class="pins"> 
-  		<li class = "item" (click)="selectAllPins()">All</li> 
-  		<!--Add in categories-->
-  		<li class="item" *ngFor="let f of fol" (click)="addFolder(f)">
-    		{{f.name}}
-  		</li>
-	</ul>
+
+<div class="generate" *ngIf="doGenerate">
+	<button (click)="done()">Done</button>
+	<app-get-designs [folders]="selectedF" [templates]="selectedT" [user]="user" [num]="num" ></app-get-designs>
 </div>
-<div>
-	<h2>Number Of Designs</h2>
-	<input type="range" min="0" max="200" value="{{num}}" class="slider" id="designNumber" (change)="getNumber($event)" (oninput)="getNumber($event)">
-</div>
-<button (click)="generate()">Generate Now</button>
-<app-get-designs [folders]="selectedF" [templates]="selectedT" [num]="num" *ngIf="doGenerate"></app-get-designs>
-<button (click)="done()">Done</button>
+

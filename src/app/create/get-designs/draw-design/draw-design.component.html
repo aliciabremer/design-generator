@@ -1,3 +1,4 @@
-<h3>{{template.name}}</h3>
-<canvas [attr.id]="template.name" width="300" height="150" style="border:1px solid #000000;">Canvas not supported by browser</canvas>
+<h3>{{folder.name}}</h3>
+<canvas [attr.id]="template.name" width="300" height="150" style="border:1px solid #000000;" class="show">Canvas not supported by browser</canvas>
+<canvas [attr.id]="folder.name" width="300" height="150" style="border:1px solid #000000;" class="temp">Canvas not supported by browser</canvas>
 <button (click) = "download()">Download</button>

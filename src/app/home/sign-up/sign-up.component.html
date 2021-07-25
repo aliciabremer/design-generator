@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!success">
     <h1>Sign Up</h1>
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group">
@@ -65,4 +65,10 @@
     </form>
     <button class="btn btn-leave" [routerLink]="['/home']">Cancel
       </button>
+</div>
+<div class="container" *ngIf="success">
+    <h3>Log In Successful</h3>
+    <p>Now that you are logged in, you can set your user preferences as to which colours and fonts you want as part of your brand designs!</p>
+     <button class="btn btn-success" [routerLink]="['/edit']">Get Started
+    </button>
 </div>

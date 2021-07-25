@@ -1,32 +1,18 @@
 export interface IUser
 {
-	id: string;
 	name:string;
 	textType:string[];
 	colours:string[];
 	fonts:string[];
 }
 
-/*
-export interface IPinAcct
-{
-
-	id:number;
-	name:string;
-	colours:string[];
-	fonts:[];
-	colourPairings:string[][];
-	nameStyle:IText;
-	
-}
-*/
-
 export interface ITemplate
 {
-	id:number;
+	id:string;
 	customerId:string;
 	dateCreated:string;
 	name:string;
+	categories:string[],
 	width:number;
 	height:number;
 	shapes:number[][];
@@ -81,7 +67,7 @@ export interface IImage
 
 export interface IPinFolder
 {
-	id:number;
+	id:string;
 	customerId:string;
 	name:string;
 	dateCreated:string;

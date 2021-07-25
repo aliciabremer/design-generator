@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteTempComponent } from './delete-temp.component';
+import { FilterFontsComponent } from './filter-fonts.component';
 
-describe('DeleteTempComponent', () => {
-  let component: DeleteTempComponent;
-  let fixture: ComponentFixture<DeleteTempComponent>;
+describe('FilterFontsComponent', () => {
+  let component: FilterFontsComponent;
+  let fixture: ComponentFixture<FilterFontsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteTempComponent ]
+      declarations: [ FilterFontsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteTempComponent);
+    fixture = TestBed.createComponent(FilterFontsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

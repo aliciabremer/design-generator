@@ -1,32 +1,54 @@
-<h2>Edit {{ folder.name | capitalize }}</h2>
-<br />
-<br />
-<h4>Title</h4>
-<input name="title" type="text" [(ngModel)] = "folder.name">
-<h4>Categories</h4>
-<div *ngFor="let c of folder.categories;let indexOfElement=index;trackBy:trackByIndex;">
-	<input name=a{{indexOfElement}} type="text" [(ngModel)] = "folder.categories[indexOfElement]">
-	<button (click)="removeCategory(indexOfElement)">Remove Category</button>
-</div>
-<button (click)="addCategory()">Add Category</button>
-<br />
-<h4>Text Options</h4>
-<!--fix-->
-<div *ngFor="let x of user.textType;let i=index;tra:trackByIndex;">
-	<h5>{{x | capitalize }}</h5>
-	<div *ngFor="let t of folder.text[i];let indexOfElement=index;trackBy:trackByIndex;">
-		<input name=a{{indexOfElement}} type="text" [(ngModel)] = "folder.text[indexOfElement]">
-		<button (click)="removeText(i, indexOfElement)">Remove Category</button>
+<div class="top">
+	<div class="left">
+		<h2>Edit</h2>
 	</div>
-	<button (click)="addText(i)">Add {{ x }}</button>
+	<div class="buttons">
+		<button (click)="tryToDelete()">Delete</button>
+		<button (click)="cancel()">Cancel</button>
+		<button (click)="done()">Done</button>
+	</div>
+	<div class="confirm-delete" *ngIf="deleting">
+		<p>Are you sure you want to delete</p>
+		<button (click)="delete()">Yes</button>
+		<button (click)="cancelDelete()">No</button>
+	</div>
 </div>
 
-<br>
-<h4>Images</h4>
-<div *ngFor="let i of folder.image;let indexOfElement=index;trackBy:trackByIndex;">
-	 <img src="i" alt={{folder.name}}> 
+<div class="section">
+	<label for="title">Name</label>
+	<input class="edit-title" name="title" id="title" type="text" [(ngModel)] = "fName">
 </div>
-<input type="file" accept=".png, .jpg, .jpeg" #image1>
-<button (click)="addImage(image1.value)">Add Image</button>
-<br>
-<button (click)="changePreferences()" [routerLink]="['/folders', id]">Finish Editing</button>
+
+<div class="section">
+	<label>Categories</label>
+
+	<div *ngFor="let c of fCategories;let indexOfElement=index;trackBy:trackByIndex;">
+		<input name=a{{indexOfElement}} type="text" [(ngModel)] = "fCategories[indexOfElement]">
+		<button (click)="removeCategory(indexOfElement)">Remove Category</button>
+	</div>
+	<button (click)="addCategory()">Add Category</button>
+</div>
+
+
+<div class="section">
+	<label>Text Options</label>
+	<div *ngFor="let x of textTypes;let i=index;trackBy:trackByIndex;">
+		<h5>{{x | capitalize }}</h5>
+		<div *ngFor="let t of fText[i];let indexOfElement=index;trackBy:trackByIndex;">
+			<input name=a{{indexOfElement}}{{i}} type="text" [(ngModel)] = "fText[i][indexOfElement]">
+			<button (click)="removeText(i, indexOfElement)">Remove Text</button>
+		</div>
+		<button (click)="addText(i)">Add {{ x }}</button>
+	</div>
+</div>
+
+<div>
+	<label>Images</label>
+	<br />
+	<div *ngFor="let i of fImages;let indexOfElement=index;trackBy:trackByIndex;">
+		 <img src="i" alt={{fName}}> 
+		 <button (click)="removeImage(indexOfElement)">Remove Image</button>
+	</div>
+	<input type="file" accept=".png, .jpg, .jpeg" class="browse" #image1>
+	<button (click)="addImage(image1.value)">Add Image</button>
+</div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { DataService } from '../core/data.service';
+import { AuthService } from '../core/auth.service';
+import { FontsService } from '../core/fonts.service';
+
 import { IUser, IText } from '../shared/interfaces';
 
 @Component({
@@ -11,27 +14,39 @@ import { IUser, IText } from '../shared/interfaces';
 })
 export class PreferencesEditComponent implements OnInit {
 
-  user:any;
-  id:number;
-  users:any[] = [];
+  user: IUser = {
+    "name": "",
+    "textType": [],
+    "colours": [],
+    "fonts": []
+  };
+  
+  id:string = "";
 
-  constructor(private dataService: DataService) { 
-  	this.id = 1; //change
+  fontsList:any[] = [];
+  filteredFonts:any[] = [];
+
+  constructor(private dataService: DataService,
+              private authService: AuthService,
+              private fontService: FontsService) 
+  { 
+  	this.authService.getId().subscribe((userId:string)=> (this.id = userId));
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
   	this.dataService.getUser(this.id)
             .subscribe((selectedUser: IUser) => this.user = selectedUser);
+    console.log("editing preferences");
     console.log(this.user);
+
+    this.fontService.availableFonts()
+            .subscribe((fonts:string[]) => this.fontsList=this.filteredFonts=fonts);
 	}
 
 	changePreferences():void {
 		console.log(this.user);
-		this.dataService.changeUser(this.user);
-		this.dataService.getUsers()
-            .subscribe((selectedUsers: IUser[]) => this.users = selectedUsers);
-    	console.log(this.users);
-
+		this.dataService.changeUser(this.id, this.user);
   }
 
    trackByIndex(indexOfElement: number, obj: any):any {
@@ -67,5 +82,20 @@ export class PreferencesEditComponent implements OnInit {
   {
     this.user.fonts.splice(index, 1);
   }	
+
+
+  filter(data: string) : void
+  {   
+    if (data) 
+    {
+      this.filteredFonts = this.fontsList.filter((f: string) => {
+          return f.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      });
+    } 
+    else
+    {
+      this.filteredFonts = this.fontsList;
+    }
+  }
 
 }

@@ -7,6 +7,8 @@ import { DataService } from './data.service';
 import { SorterService } from './sorter.service';
 import { DrawService } from './draw.service';
 import { AuthService } from './auth.service';
+import { FontsService } from './fonts.service';
+import { EditTempService } from './edit-temp.service';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { AuthService } from './auth.service';
   	DataService,
   	SorterService,
   	DrawService,
-    AuthService
+    AuthService,
+    FontsService
   ]
 })
 export class CoreModule { }

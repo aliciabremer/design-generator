@@ -1,30 +1,49 @@
-<button (click)="create()">Create Folder</button>\<br />
+<hr>
+<div class="filter">
+    <h4>Filter : </h4>
+    <app-filter-list (changed)="filter($event)"></app-filter-list>
+</div>
+<div class="sorting">
+    <h4>Sort By : </h4>
+    <button (click)="sort('name')">Name</button>
+    <button (click)="sort('dateCreated')">Date Created</button>
+</div>
+<!-->
+<div class = "per-page">
+    <p>Folders: {{ filteredFolders.length }}</p>
+    <select id="fontSelect" [(ngModel)]="numPerPage" class="select-font">
+        <option [value]="i" *ngFor="let i of pageOptions">{{i}}</option>
+    </select>
+</div>
 <br />
-<app-filter-list (changed)="filter($event)"></app-filter-list>
+<br />
+
+<div>
+    <p>Page {{page}}</p>
+    <button (click)="changePage(-2)">Start</button>
+    <button (click)="changePage(-1)">Back</button>
+    <button (click)="changePage(1)">Next</button>
+    <button (click)="changePage(2)">Last</button>
+</div>
+<!-->
 <br />
 <br />
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th (click)="sort('name')">Name</th>
-            <th (click)="sort('dateCreated')">Date Created</th>
-            <th (click)="sort('dateLastUsed')">Date Last Used</th>
-            <th>Categories</th>
+<br />
+<div>
+    <table class="table table-hover">
+        <tr *ngFor="let f of filteredFolders; let indexOfElement=index; trackBy:trackByIndex;">
+            <td *ngIf="validFolder(indexOfElement)">
+                <div class="filter">
+                    <p>{{ f.name | capitalize }}</p>
+                </div>
+                <div class="sorting">
+                    <button (click)="sendFolder(indexOfElement)">View</button>
+                </div>
+            </td>
         </tr>
-    </thead>
-    <tr *ngFor="let f of filteredFolders">
-        <td>
-            <a [routerLink]="['/folders', f.id]">
-                {{ f.name | capitalize }}
-            </a>
-        </td>
-        <td>{{ f.dateCreated }}</td>
-        <td>{{ f.dateLastUsed }}</td>
-        <td>{{ f.categories }}</td>
-    </tr>
-    <tr *ngIf="!filteredFolders || !filteredFolders.length">
-        <td colspan="4">No folders found</td>
-    </tr>
-</table>
-Number of Folders: {{ filteredFolders.length }}
+        <tr *ngIf="!filteredFolders || !filteredFolders.length">
+            <td colspan="4">No folders found</td>
+        </tr>
+    </table>
+</div>
 <br />

@@ -2,4 +2,14 @@
     float: left;
     padding: 2%;
 }  
+
+.filter
+{
+	float:left;
+}
+
+.sorting
+{
+	float:right;
+}
       

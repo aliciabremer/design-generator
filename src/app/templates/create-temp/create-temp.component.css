@@ -1,0 +1,39 @@
+.buttons
+{
+	float:right;
+}
+
+.left
+{
+	float:left;
+}
+
+
+
+.inputting
+{
+	float:none;
+	display: inline-block;
+	width: 100%;
+	padding-left: 30px;
+}
+
+label
+{
+	text-align: left;
+	font-size: 15px;
+	font-style: bold;
+	padding-right: 20px;
+	padding-bottom: 10px;
+}
+
+input
+{
+	text-align: left;
+	width: 300px;
+}
+
+.editing
+{
+	padding-top: 20px;
+}

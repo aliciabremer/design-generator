@@ -11,6 +11,12 @@ header h1 .color {
     color: #ab1d79;
 }
 
+body
+{
+	background-color:white;
+	color:white;
+}
+
 .user {
 	float:right;
 	text-align: center;
@@ -21,6 +27,10 @@ header h1 .color {
   margin-left: 5px;
 }
 
+a
+{
+	color:#d0c3f1;
+}
 
 p {
   color: #666666;
@@ -44,5 +54,11 @@ p {
 
 .mat-typography
 {
+	color:white;
+}
+
+.mat-menu-panel
+{
+	background-color: white;
 	color:white;
 }

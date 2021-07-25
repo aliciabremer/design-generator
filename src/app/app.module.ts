@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes, Router } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AppFirebaseModule } from './app-firebase.module';
 import { AppMaterialModule } from './app-material.module';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [
@@ -42,10 +45,20 @@ import { AppMaterialModule } from './app-material.module';
     SharedModule,
     CoreModule,
     AppFirebaseModule,
-    AppMaterialModule
-    
+    AppMaterialModule,
+    RouterModule,
+    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule 
+{ 
+  constructor(
+    private readonly router: Router,
+  ) {
+    router.events
+      .subscribe(console.log)
+  }
+
+}

@@ -1,15 +1,38 @@
-<button (click)="sort('name')">Sort By Name</button>
-<button (click)="sort('dateCreated')">Sort Oldest To Newest</button>
+<hr>
+<div class="filter">
+    <h4>Filter: </h4>
+    <app-filter-temp (changed)="filter($event)"></app-filter-temp>
+</div>
+
 <br />
-<app-filter-temp (changed)="filter($event)"></app-filter-temp>
+<div class="sorting">
+	<h4>Sort By : </h4>
+	<button (click)="sort('name')">Sort By Name</button>
+	<button (click)="sort('dateCreated')">Sort Oldest To Newest</button>
+</div>
 <br />
-<button (click)="create()" >Create Template</button>
+<!-->
+<div class = "per-page">
+    <p>Templates: {{ filteredTemplates.length }}</p>
+    <select id="page-select" [(ngModel)]="numPerPage" class="select-page">
+        <option [value]="i" *ngFor="let i of pageOptions">{{i}}</option>
+    </select>
+</div>
+
+<div>
+    <p>Page {{page}}</p>
+    <button (click)="changePage(-2)">Start</button>
+    <button (click)="changePage(-1)">Back</button>
+    <button (click)="changePage(1)">Next</button>
+    <button (click)="changePage(2)">Last</button>
+</div>
+<!-->
+<br />
+<br />
 <div *ngFor="let t of filteredTemplates;" class="container">
 	<div class="item">
-		<app-draw-temp [template]="t" [scaling]="0.1"></app-draw-temp>
+		<app-draw-temp [template]="t" [scaling]="0.2"></app-draw-temp>
 		<br />
-		<button [routerLink] = "['/templates', t.id]">Edit Template</button>
-		<br />
-		<button [routerLink] = "['/delete-template', t.id]">Delete Template</button>
+		<button (click)="sendTemplate(t)">View/Edit</button>
 	</div>
 </div>

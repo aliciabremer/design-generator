@@ -8,20 +8,21 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterTempComponent } from './templates-list/filter-temp/filter-temp.component';
 import { CreateTempComponent } from './create-temp/create-temp.component';
 import { EditTempComponent } from './edit-temp/edit-temp.component';
-import { DeleteTempComponent } from './delete-temp/delete-temp.component';
 import { TemplatesListComponent } from './templates-list/templates-list.component';
 import { DrawTempComponent } from './templates-list/draw-temp/draw-temp.component';
 import { EditRectComponent } from './edit-temp/edit-rect/edit-rect.component';
 import { EditCircComponent } from './edit-temp/edit-circ/edit-circ.component';
 import { EditTextComponent } from './edit-temp/edit-text/edit-text.component';
 import { EditImageComponent } from './edit-temp/edit-image/edit-image.component';
+import { MenuComponent } from './edit-temp/menu/menu.component';
 
 
 @NgModule({
   declarations: [TemplatesComponent, FilterTempComponent, CreateTempComponent, 
-  				EditTempComponent, DeleteTempComponent, TemplatesListComponent, 
+  				EditTempComponent, TemplatesListComponent, 
   				DrawTempComponent, EditRectComponent, EditCircComponent, EditTextComponent,
-  				 EditImageComponent],
+  				 EditImageComponent,
+  				 MenuComponent],
   imports: [
     CommonModule,
     TemplatesRoutingModule,

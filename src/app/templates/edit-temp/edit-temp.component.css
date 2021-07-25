@@ -1,5 +1,6 @@
 .item {
-    float: left;
+    float: right;
+    align-content: center;
     padding: 2%;
 } 
 .boxes {
@@ -10,3 +11,37 @@
 	clear:both;
 }
 
+.buttons
+{
+	float:right;
+}
+
+.left
+{
+	float:left;
+}
+
+.break
+{
+	float:none;
+}
+.menu
+{
+	float:left;
+	padding-right: 50px;
+}
+.editing
+{
+	float:left;
+	align-content:center;
+}
+.change
+{
+	float:right;
+	width: 100px;
+}
+
+.top
+{
+	padding-bottom: 30px;
+}

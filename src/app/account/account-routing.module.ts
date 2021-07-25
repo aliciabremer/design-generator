@@ -6,7 +6,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth
 const redirectUnauthorizedToLogIn = () => redirectUnauthorizedTo(['log-in']);
 
 const routes: Routes = [
-	{path: 'account', component: AccountComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogIn }}	
+	{path: 'account', component: AccountComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogIn }},	
 ];
 
 @NgModule({

@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-filter-temp',
-  templateUrl: './filter-temp.component.html',
-  styleUrls: ['./filter-temp.component.css']
+  selector: 'app-filter-fonts',
+  templateUrl: './filter-fonts.component.html',
+  styleUrls: ['./filter-fonts.component.css']
 })
-export class FilterTempComponent
+export class FilterFontsComponent 
 {
+
   //string to filter list by
   private _filter: string = "";
 
@@ -19,7 +20,7 @@ export class FilterTempComponent
   {
     return this._filter;
   }
-    
+
   /**
    * Take the string to filter the list, assign it to _filter and emit filter.
    * 
@@ -28,8 +29,8 @@ export class FilterTempComponent
    */
   set filter(val: string) 
   { 
-      this._filter = val;
-      this.changed.emit(this.filter); //Raise changed event
+    this._filter = val;
+    this.changed.emit(this.filter); //Raise changed event
   }
 
   //output the string to filter by

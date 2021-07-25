@@ -12,5 +12,14 @@
 	<input type="range" min="0" max="{{height}}" value="{{img.height}}" class="slider" id="height" (change)="getYHeight($event)" (oninput)="getYHeight($event)">
 	<!--Fix value-->
 </div>
+<!-->
+<div>
+	<label>Order</label>
+	<button (click)="sendToBack()">Send to back</button>
+	<button (click)="sendBackward()">Send Backward</button>
+	<button (click)="sendForward()">Send Forward</button>
+	<button (click)="sendToFront()">Sent to front</button>
+</div>
+<!-->
 <button (click)="finished()">Done</button>
 <button (click)="delete()">Delete</button>

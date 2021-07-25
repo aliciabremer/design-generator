@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
@@ -11,7 +12,8 @@ import { DrawDesignComponent } from './get-designs/draw-design/draw-design.compo
   declarations: [CreateComponent, GetDesignsComponent, DrawDesignComponent],
   imports: [
     CommonModule,
-    CreateRoutingModule
+    CreateRoutingModule,
+    FormsModule
   ],
   exports: [CreateComponent]
 })

@@ -19,5 +19,15 @@
     	<option [value]="indexOfElement" *ngFor="let i of colours;let indexOfElement=index;trackBy:trackByIndex;">Colour {{indexOfElement + 1}}</option>
 	</select>
 </div>
+<!-->
+<div>
+	<label>Order</label>
+	<button (click)="sendToBack()">Send to back</button>
+	<button (click)="sendBackward()">Send Backward</button>
+	<button (click)="sendForward()">Send Forward</button>
+	<button (click)="sendToFront()">Sent to front</button>
+</div>
+<!-->
+<br />
 <button (click)="finished()">Done</button>
 <button (click)="delete()">Delete</button>
