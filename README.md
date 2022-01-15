@@ -17,7 +17,7 @@ https://pinning-app.web.app/create
 
 ## Screenshots
 
-The home page.
+The home page. \n
 ![Image of home page.](./screenshots/homepage.png "Front page")
 
 The screen when you first log in after sign up.
