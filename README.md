@@ -1,27 +1,20 @@
-# PinningApp
+# Design Generator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+This application is a design generator that helps business owners, bloggers and more generate designs to help promote their business.  Users can create folders and templates that can be combined to quickly and easily create new designs.
 
-## Development server
+The project uses firebase for the database and authentication. The authentication is done with email and password. The email is used as an id to get and save the user’s information as they use the application.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The application has a preferences component that allows the user to view and edit their preferences based on the fonts and colours they use in their business or blog.
 
-## Code scaffolding
+The application also has a template component.  The user can create and edit templates with basic shapes, text and image options. These templates are used to generate the final design. The template component was built using a canvas element.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The application has a folder component.  This component allows the user to create and edit folders, which store post or product specific information. The folders are made of a name, text options, images and categories.  
 
-## Build
+The create component of the application combines the folders and creates designs for them using the templates generated. These final designs can be downloaded as images to be used in other applications.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+https://pinning-app.web.app/create
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Screenshots
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
