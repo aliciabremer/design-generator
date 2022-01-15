@@ -17,4 +17,14 @@ https://pinning-app.web.app/create
 
 ## Screenshots
 
+The home page.
+![Image of home page.](./screenshots/homepage.png "Front page")
 
+The screen when you first log in after sign up.
+![Image of log in.](./screenshots/login.png "Login first page")
+
+Form for creating a new template.
+![Image of template creation form.](./screenshots/template.png "New template form")
+
+Designing a new template.
+![Image of designing a new template.](./screenshots/design.png "New template design")
